@@ -9,7 +9,11 @@ define([
     'use strict';
 
     var QuestionView = Backbone.View.extend({
-        template: JST['app/scripts/templates/question.hbs']
+        template: JST['app/scripts/templates/question.hbs'],
+
+        render: function() {
+          this.$el.html(this.template());
+        }
     });
 
     return QuestionView;

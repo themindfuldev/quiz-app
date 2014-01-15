@@ -9,7 +9,11 @@ define([
     'use strict';
 
     var SummaryView = Backbone.View.extend({
-        template: JST['app/scripts/templates/summary.hbs']
+        template: JST['app/scripts/templates/summary.hbs'],
+
+        render: function() {
+          this.$el.html(this.template());
+        }
     });
 
     return SummaryView;

@@ -4,6 +4,8 @@ test/temp
 .sass-cache
 app/bower_components
 .tmp
+.grunt
 test/bower_components/
 *.sublime-project
 *.sublime-workspace
+_SpecRunner.html
