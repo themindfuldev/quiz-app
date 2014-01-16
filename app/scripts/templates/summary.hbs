@@ -1,2 +1,17 @@
-<p>Your content here.</p>
-
+<h4>Summary</h4>
+<p>Hi, {{name}}, please find your answers report above.</p>
+<hr/>
+<h5>You scored {{score}}% in this quiz. {{result}}</h5>
+<hr/>
+<ol>
+{{#each questions}}
+  <li>For the question <strong>{{question}}</strong> we got:
+    <ul>
+      {{#each answer}}
+        <li>{{percentage}}% of {{answer}}.</li>
+      {{/each}}
+    </ul>
+  </li>
+{{/each}}
+</ol>
+<p>See you next time!</p>

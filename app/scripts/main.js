@@ -19,14 +19,6 @@ require.config({
     },
     handlebars: {
       exports: 'Handlebars'
-    },
-    localstorage: {
-      deps: ['backbone']
-    }
-  },
-  map: {
-    '*': {
-      'backbone-local-storage': 'backbone.localStorage'
     }
   },
   paths: {
@@ -34,8 +26,7 @@ require.config({
     backbone: '../bower_components/backbone/backbone',
     underscore: '../bower_components/underscore/underscore',
     bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
-    handlebars: '../bower_components/handlebars/handlebars',
-    'backbone.localStorage': '../bower_components/backbone.localStorage/backbone.localStorage'
+    handlebars: '../bower_components/handlebars/handlebars'
   }
 });
 
