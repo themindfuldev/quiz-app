@@ -8,7 +8,7 @@
   <li><div>For the question #{{id}} - <strong>{{question}}</strong></div>
     <ul class="answers">
       {{#each answers}}
-        <li class="{{result}}">{{answer}}</li>
+        <li class="{{result}}">{{answer}} ({{percentage}}% of users chose this answer)</li>
       {{/each}}
     </ul>
   </li>
