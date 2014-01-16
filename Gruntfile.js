@@ -194,12 +194,14 @@ module.exports = function (grunt) {
         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         options: {
           baseUrl: '<%= yeoman.app %>/scripts',
-          optimize: 'none',
+          optimize: 'uglify',
           paths: {
             'templates': '../../.tmp/scripts/templates',
             'jquery': '../../app/bower_components/jquery/jquery',
             'underscore': '../../app/bower_components/underscore/underscore',
-            'backbone': '../../app/bower_components/backbone/backbone'
+            'backbone': '../../app/bower_components/backbone/backbone',
+            'bootstrap': '../bower_components/sass-bootstrap/dist/js/bootstrap',
+            'handlebars': '../bower_components/handlebars/handlebars'
           },
           // TODO: Figure out how to make sourcemaps work with grunt-usemin
           // https://github.com/yeoman/grunt-usemin/issues/30
