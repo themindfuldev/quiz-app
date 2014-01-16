@@ -1,6 +1,6 @@
 {
   "name": "quiz-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "dependencies": {
     "sass-bootstrap": "~3.0.0",
     "jquery": "~1.9.0",

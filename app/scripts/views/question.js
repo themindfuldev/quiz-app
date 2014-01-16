@@ -69,7 +69,7 @@ define([
 
       // Retrieving model
       userId = sessionStorage.getItem(Common.Repositories.currentUserId);
-      userModel = new UserModel(userId);
+      userModel = new UserModel({ id:userId });
       userModel.fetch();
 
       // Updating model

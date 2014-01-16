@@ -6,7 +6,8 @@ define([], function () {
   var Common = {
     Repositories: {
       usersSequence: 'users-sequence',
-      currentUserId: 'current-user-id'
+      currentUserId: 'current-user-id',
+      users: 'users-'
     }
   }
 

@@ -4,7 +4,7 @@
   <form role="form">
     <ol>
     {{#each answers}}
-      <li><input id="answer-{{@index}}" type="checkbox" value="{{@index}}"><label class="control-label" for="answer-{{@index}}">{{this}}</label></li>
+      <li><input id="answer-{{@index}}" type="checkbox" name="question" value="{{@index}}"><label class="control-label" for="answer-{{@index}}">{{this}}</label></li>
     {{/each}}
     </ol>
     <button type="submit" class="btn btn-default">Submit</button>
