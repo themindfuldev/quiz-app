@@ -6,8 +6,10 @@ define([
   'backbone',
   'templates',
   'common',
-  'models/user'
-], function ($, _, Backbone, JST, Common, UserModel) {
+  'models/user',
+  'views/error',
+  'boot'
+], function ($, _, Backbone, JST, Common, UserModel, ErrorView) {
   'use strict';
 
   var QuestionView = Backbone.View.extend({
@@ -82,17 +84,22 @@ define([
     },
 
     validate: function (attrs) {
-      return attrs.length;
+      return attrs.length >= 1 && attrs.length <= 3;
     },
 
     showErrors: function() {
+      var errorView = new ErrorView({
+        message: 'You must select between 1 and 3 answers'
+      });
+      errorView.render();
+      this.$el.find('.error-container').html(errorView.el);
+
       this.$el.find('.form-group').addClass('has-error');
-      this.$el.find('.glyphicon').removeClass('hide');
     },
 
     hideErrors: function () {
       this.$el.find('.form-group').removeClass('has-error');
-      this.$el.find('.glyphicon').addClass('hide');
+      this.$el.find('.alert').alert('close');
     }
 
   });

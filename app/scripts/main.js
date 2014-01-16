@@ -21,6 +21,11 @@ require.config({
       exports: 'Handlebars'
     }
   },
+  map: {
+    '*': {
+      'boot': 'bootstrap'
+    }
+  },
   paths: {
     jquery: '../bower_components/jquery/jquery',
     backbone: '../bower_components/backbone/backbone',
@@ -29,13 +34,6 @@ require.config({
     handlebars: '../bower_components/handlebars/handlebars',
   }
 });
-
-  // map: {
-  //   '*': {
-  //     'jquery-validation': 'validation'
-  //   }
-  // },
-
 
 require([
   'jquery',
