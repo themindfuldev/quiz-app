@@ -52,6 +52,26 @@ form input[type="checkbox"] {
     margin: 4px 6px 0 0px;
 }
 
+ol.questions {
+    li > div {
+        font-size: 1.1em;
+        margin-top: 10px;
+    }
+    ul.answers {
+        li.correct {
+            color: green;
+        }
+
+        li.incorrect {
+            color: red;
+        }
+
+        li.answered {
+            border: 1px solid blue;
+        }
+    }
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {

@@ -3,16 +3,15 @@
 <hr/>
 <h5>You scored {{score}}% in this quiz. {{result}}</h5>
 <hr/>
-<ol>
+<ol class="questions">
 {{#each questions}}
-  <li>For the question <strong>{{question}}</strong> we got:
-    <ul>
-      {{#each answer}}
-        <li>{{percentage}}% of {{answer}}.</li>
+  <li><div>For the question #{{id}} - <strong>{{question}}</strong></div>
+    <ul class="answers">
+      {{#each answers}}
+        <li class="{{result}}">{{answer}}</li>
       {{/each}}
     </ul>
   </li>
 {{/each}}
 </ol>
-<hr/>
-<h5>Thanks for your time! <a href="/">Start over</a>.</h5>
+<h5>Thanks for your time! <a href="/">Do it again!</a></h5>

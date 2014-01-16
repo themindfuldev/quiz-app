@@ -58,7 +58,7 @@ define([
 
       // Building data
       answers = $.map(this.$el.find('input:checked'), function(element) {
-        return element.value;
+        return parseInt(element.value);
       });
 
       return answers;
@@ -69,7 +69,7 @@ define([
 
       // Retrieving model
       userId = sessionStorage.getItem(Common.Repositories.currentUserId);
-      userModel = new UserModel({ id:userId });
+      userModel = new UserModel({ id: userId });
       userModel.fetch();
 
       // Updating model
