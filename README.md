@@ -18,35 +18,35 @@ Refactor to Design Patterns for Large-Scale JS
 1. Notice how the User and Summary models repeat the CRUD logic persistence using local storage. Refactor that by creating a common Module + Façade to be reused on both models, name it UserDAO or UserRepository. 
 1. Create a function on this new Module for getting the **Score Top Five**, showing their user names, emails and scores in an array of objects like above. Expose it in the Façade.
 
-```javascript
-[ 
-  { 
-    name: 'Yoda',
-    email: 'yoda@disney.com',
-    score: 100
-  },
-  {
-    name: 'Darth Maul',
-    email: 'dmaul@disney.com',
-    score: 60
-  },
-  {
-    name: 'Palpatine',
-    email: 'palpatine@disney.com',
-    score: 40
-  },
-  {
-    name: 'Han Solo',
-    email: 'hsolo@disney.com',
-    score: 40
-  },
-  {
-    name: 'Jabba The Hut',
-    email: 'jhut@disney.com',
-    score: 20
-  }
-]
-```
+    ```javascript
+    [ 
+      { 
+        name: 'Yoda',
+        email: 'yoda@disney.com',
+        score: 100
+      },
+      {
+        name: 'Darth Maul',
+        email: 'dmaul@disney.com',
+        score: 60
+      },
+      {
+        name: 'Palpatine',
+        email: 'palpatine@disney.com',
+        score: 40
+      },
+      {
+        name: 'Han Solo',
+        email: 'hsolo@disney.com',
+        score: 40
+      },
+      {
+        name: 'Jabba The Hut',
+        email: 'jhut@disney.com',
+        score: 20
+      }
+    ]
+    ```
 1. Create a Sidebar view that will show all the Score Top Five (name, email and score) in a sidebar which will always be visible on every page.
 1. Create a Mediator (a.k.a. Pub/Sub) to control the communication flow for the following scenario:
   1. Every time a user is created or updated, this Sidebar view must be updated
@@ -58,3 +58,4 @@ Refactor to Design Patterns for Large-Scale JS
   1. Create a 'clear all' button on this sidebar to call this module.
   1. This button should invoke the Module's function via events. You need to setup some event, listener and publisher to make that happen.
   1. Differently from the Mediator, the Observer CAN fire events on the Observed methods directly.
+1. Send me your solution in a GitHub repo.
