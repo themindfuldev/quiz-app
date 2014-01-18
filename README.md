@@ -15,7 +15,7 @@ Refactor to Design Patterns for Large-Scale JS
 ======================================================
 
 1. Fork this repo into your own GitHub account.
-1. Notice how the User and Summary models repeat the CRUD logic persistence using local storage. Refactor that by creating a common Module + Façade to be reused on both models, name it UserDAO or UserRepository. 
+1. Notice how the User and Summary models repeat the CRUD logic persistence using local storage. Refactor that by creating a common Module + Façade to be reused on both models, name it UserDAO or UserRepository.
 1. Create a function on this new Module for getting the **Score Top Five**, showing their user names, emails and scores in an array of objects like above. Expose it in the Façade.
 
     ```javascript
@@ -47,6 +47,7 @@ Refactor to Design Patterns for Large-Scale JS
       }
     ]
     ```
+    
 1. Create a Sidebar view that will show all the Score Top Five (name, email and score) in a sidebar which will always be visible on every page.
 1. Create a Mediator (a.k.a. Pub/Sub) to control the communication flow for the following scenario:
   1. Every time a user is created or updated, this Sidebar view must be updated
