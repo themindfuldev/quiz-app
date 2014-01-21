@@ -7,6 +7,7 @@ Run
 ===
 
 1. npm install
+1. bower install
 1. grunt build
 1. grunt server (development mode) 
 1. grunt server:dist (production mode)
