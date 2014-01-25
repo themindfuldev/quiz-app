@@ -3,9 +3,8 @@ define([
   'underscore',
   'backbone',
   'templates',
-  'config/common',
   'models/user'
-], function ($, _, Backbone, JST, Common, UserModel) {
+], function ($, _, Backbone, JST, UserModel) {
   'use strict';
 
   var WelcomeView = Backbone.View.extend({

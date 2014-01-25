@@ -1,10 +1,11 @@
 define([
   'underscore',
   'backbone',
+  'collections/user',
   'config/questions-data',
   'models/user',
   'repositories/user'
-], function (_, Backbone, QuestionsData, UserModel, UserRepository) {
+], function (_, Backbone, UserCollection, QuestionsData, UserModel, UserRepository) {
   'use strict';
 
   var SummaryModel = Backbone.Model.extend({
@@ -19,15 +20,13 @@ define([
     },
 
     buildAnswersStats: function() {
-      var answersStats, usersSequence, userId, userModel;
+      var answersStats, userCollection;
 
       answersStats = {};
-      usersSequence = UserRepository.getTotalUsers();
+      userCollection = new UserCollection();
+      userCollection.fetch();
 
-      for (userId = 1; userId <= usersSequence; userId++) {
-        userModel = new UserModel({ id: userId });
-        userModel.fetch();
-
+      userCollection.forEach(function(userModel) {
         _.each(userModel.get('questions'), function(question) {
           if (!answersStats[question.id]) {
             answersStats[question.id] = [];
@@ -37,7 +36,7 @@ define([
             answersStats[question.id][answer] = answersStats[question.id][answer] + 1 || 1;
           });
         });
-      }
+      });
 
       return answersStats;
     },
@@ -56,11 +55,13 @@ define([
 
       _.each(answersStats, function(answers, questionId) {
         if (!self.answersPercentage[questionId]) {
-          self.answersPercentage[questionId] = Array.apply(null, new Array(5)).map(Number.prototype.valueOf,0);
+          self.answersPercentage[questionId] =
+            Array.apply(null, new Array(5)).map(Number.prototype.valueOf, 0);
         }
 
         _.each(answers, function(answer, answerId) {
-          self.answersPercentage[questionId][answerId] = answer/answerTotals[questionId];
+          self.answersPercentage[questionId][answerId] =
+            answer / answerTotals[questionId] * 100;
         });
       });
     },
@@ -146,7 +147,15 @@ define([
       return questions;
     },
 
-    sync: UserRepository.sync
+    sync: function(method, model, options) {
+      options || (options = {});
+
+      switch (method){
+        case 'read':
+          UserRepository.read(model, options);
+          break;
+      }
+    }
   });
 
   return SummaryModel;

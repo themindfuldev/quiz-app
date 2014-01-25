@@ -12,7 +12,24 @@ define([
       questions: []
     },
 
-    sync: UserRepository.sync
+    sync: function(method, model, options) {
+      options || (options = {});
+
+      switch (method){
+        case 'create':
+          UserRepository.create(model);
+          break;
+        case 'read':
+          UserRepository.read(model, options);
+          break;
+        case 'update':
+          UserRepository.update(model, options);
+          break;
+        case 'delete':
+          UserRepository.remove(model, options);
+          break;
+      }
+    },
   });
 
   return UserModel;

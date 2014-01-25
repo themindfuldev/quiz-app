@@ -1,22 +1,22 @@
 define([
   'jquery',
   'backbone',
-  'config/common',
   'config/questions-data',
   'models/question',
   'models/user',
   'models/summary',
+  'repositories/user',
   'views/welcome',
   'views/question',
   'views/summary'
 ], function (
   $,
   Backbone,
-  Common,
   QuestionsData,
   QuestionModel,
   UserModel,
   SummaryModel,
+  UserRepository,
   WelcomeView,
   QuestionView,
   SummaryView) {
@@ -45,7 +45,7 @@ define([
       var userId, userModel, welcomeView;
 
       // Retrieving model
-      userId = sessionStorage.getItem(Common.Repositories.currentUserId);
+      userId = UserRepository.getCurrentUserId();
       if (userId) {
         userModel = new SummaryModel({ id: userId });
         userModel.fetch();
@@ -62,30 +62,39 @@ define([
     },
 
     question: function(id) {
-      var questionData, questionModel, questionView;
+      var userId, questionData, questionModel, questionView;
 
-      id = id || 1;
-
-      questionData = _.findWhere(QuestionsData, { id: parseInt(id, 10) });
-      questionModel = new QuestionModel(questionData);
-      questionView = new QuestionView({
-        model: questionModel
-      });
-      this.render(questionView);
+      userId = UserRepository.getCurrentUserId();
+      if (userId && id) {
+        questionData = _.findWhere(QuestionsData, { id: parseInt(id, 10) });
+        questionModel = new QuestionModel(questionData);
+        questionView = new QuestionView({
+          model: questionModel
+        });
+        this.render(questionView);
+      }
+      else {
+        this.navigate('', { trigger:true });
+      }
     },
 
     summary: function() {
       var userId, summaryModel, summaryView;
 
       // Retrieving model
-      userId = sessionStorage.getItem(Common.Repositories.currentUserId);
-      summaryModel = new SummaryModel({ id: userId });
-      summaryModel.fetch();
+      userId = UserRepository.getCurrentUserId();
+      if (userId) {
+        summaryModel = new SummaryModel({ id: userId });
+        summaryModel.fetch();
 
-      summaryView = new SummaryView({
-        model: summaryModel
-      });
-      this.render(summaryView);
+        summaryView = new SummaryView({
+          model: summaryModel
+        });
+        this.render(summaryView);
+      }
+      else {
+        this.navigate('', { trigger:true });
+      }
     },
 
     render: function(view) {

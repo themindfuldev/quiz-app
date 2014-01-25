@@ -3,11 +3,11 @@ define([
   'underscore',
   'backbone',
   'templates',
-  'config/common',
   'models/user',
+  'repositories/user',
   'views/error',
   'boot'
-], function ($, _, Backbone, JST, Common, UserModel, ErrorView) {
+], function ($, _, Backbone, JST, UserModel, UserRepository, ErrorView) {
   'use strict';
 
   var QuestionView = Backbone.View.extend({
@@ -68,7 +68,7 @@ define([
       var userId, userModel;
 
       // Retrieving model
-      userId = sessionStorage.getItem(Common.Repositories.currentUserId);
+      userId = UserRepository.getCurrentUserId();
       userModel = new UserModel({ id: userId });
       userModel.fetch();
 
