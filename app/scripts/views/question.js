@@ -49,7 +49,7 @@ define([
           nextRoute = '/summary';
         }
         else {
-          nextRoute = '/question/' + (this.model.id + 1);
+          nextRoute = '/question-' + (this.model.id + 1);
         }
         Backbone.history.navigate(nextRoute, { trigger: true });
       }

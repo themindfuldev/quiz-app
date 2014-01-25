@@ -76,8 +76,9 @@ module.exports = function (grunt) {
         hostname: 'localhost'
       },
       rules: [
-        { from: '^/question/(.*)$', to: '/' },
-        { from: '^/summary$', to: '/' }
+        { from: '^\/question-(.*)$', to: '/' },
+        { from: '^\/summary$', to: '/' },
+        { from: '^\/again$', to: '/' }
       ],
       livereload: {
         options: {

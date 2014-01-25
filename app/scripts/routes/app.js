@@ -28,17 +28,45 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
       '': 'welcome',
-      'question/:id': 'question',
+      'again': 'again',
+      'question-:id': 'question',
       'summary': 'summary'
     },
 
     welcome: function() {
-      var welcomeView = new WelcomeView();
+      var userModel, welcomeView;
+
+      userModel = new UserModel();
+      welcomeView = new WelcomeView({
+        model: userModel
+      });
+      this.render(welcomeView);
+    },
+
+    again: function() {
+      var userId, userModel, welcomeView;
+
+      // Retrieving model
+      userId = sessionStorage.getItem(Common.Repositories.currentUserId);
+      if (userId) {
+        userModel = new SummaryModel({ id: userId });
+        userModel.fetch();
+      }
+      else {
+        userModel = new UserModel();
+      }
+
+      // Sending it to the view
+      welcomeView = new WelcomeView({
+        model: userModel
+      });
       this.render(welcomeView);
     },
 
     question: function(id) {
       var questionData, questionModel, questionView;
+
+      id = id || 1;
 
       questionData = _.findWhere(QuestionsData, { id: parseInt(id, 10) });
       questionModel = new QuestionModel(questionData);

@@ -1,4 +1,9 @@
 <div class="alert alert-danger alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <span class="glyphicon glyphicon-exclamation-sign"></span> <strong>Error!</strong> <span>{{message}}.</span>
+  <span class="glyphicon glyphicon-exclamation-sign"></span> <strong>Error!</strong>
+  {{#if message}}
+    <span>{{message}}.</span>
+  {{else}}
+    <span>Something went wrong!</span>
+  {{/if}}
 </div>

@@ -18,7 +18,7 @@ define([
     },
 
     render: function() {
-      this.$el.html(this.template());
+      this.$el.html(this.template(this.model.toJSON()));
     },
 
     submit: function(e) {
@@ -28,7 +28,7 @@ define([
 
       userModel = this.buildUserModel();
       userModel.save();
-      Backbone.history.navigate('/question/1', { trigger: true });
+      Backbone.history.navigate('/question-1', { trigger: true });
     },
 
     buildUserModel: function() {

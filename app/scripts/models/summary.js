@@ -147,6 +147,7 @@ define([
       return questions;
     },
 
+    // Local storage persistence
     sync: function(method, model, options) {
       options || (options = {});
 
