@@ -1,14 +1,16 @@
 <h4>Summary</h4>
 <p>Hi, {{name}}, please find your answers report above.</p>
 <hr/>
-<h5>You scored {{score}}% in this quiz. {{result}}</h5>
+<h5>You scored {{formatPercentage score}}% in this quiz. {{result}}</h5>
 <hr/>
 <ol class="questions">
 {{#each questions}}
-  <li><div>For the question #{{id}} - <strong>{{question}}</strong></div>
+  <li><div>For the question: <strong>{{question}}</strong></div>
     <ul class="answers">
       {{#each answers}}
-        <li class="{{result}}">{{answer}} ({{percentage}}% of users chose this answer)</li>
+        <li class="{{result.className}}">
+          {{answer}} ({{formatPercentage result.percentage}}% of users chose this answer for question #{{../id}})
+        </li>
       {{/each}}
     </ul>
   </li>

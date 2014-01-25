@@ -1,10 +1,8 @@
-/*global define*/
-
 define([
   'underscore',
   'backbone',
-  'common',
-  'questions-data',
+  'config/common',
+  'config/questions-data',
   'models/user'
 ], function (_, Backbone, Common, QuestionsData, UserModel) {
   'use strict';
@@ -62,8 +60,7 @@ define([
         }
 
         _.each(answers, function(answer, answerId) {
-          self.answersPercentage[questionId][answerId] =
-            parseFloat(answer/answerTotals[questionId] * 100).toFixed(2);
+          self.answersPercentage[questionId][answerId] = answer/answerTotals[questionId];
         });
       });
     },
@@ -121,23 +118,25 @@ define([
         };
 
         _.each(originalQuestion.answers, function(originalAnswer, index) {
-          var result;
+          var className;
 
           if (_.contains(originalQuestion.correctAnswers, index)) {
-            result = 'correct';
+            className = 'correct';
           }
           else {
-            result = 'incorrect';
+            className = 'incorrect';
           }
 
           if (_.contains(answeredQuestion.answers, index)) {
-            result += ' answered';
+            className += ' answered';
           }
 
           question.answers.push({
             answer: originalAnswer,
-            result: result,
-            percentage: self.answersPercentage[question.id][index]
+            result: {
+              className: className,
+              percentage: self.answersPercentage[question.id][index]
+            }
           });
         });
 

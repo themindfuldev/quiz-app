@@ -1,10 +1,8 @@
-/*global define*/
-
 define([
   'jquery',
   'backbone',
-  'common',
-  'questions-data',
+  'config/common',
+  'config/questions-data',
   'models/question',
   'models/user',
   'models/summary',

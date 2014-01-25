@@ -1,4 +1,3 @@
-/*global require*/
 'use strict';
 
 require.config({
@@ -37,8 +36,13 @@ require.config({
 
 require([
   'backbone',
+  'config/custom-helpers',
+  'config/partials',
   'routes/app'
-], function (Backbone, AppRouter) {
+], function (Backbone, CustomHelpers, Partials, AppRouter) {
+  CustomHelpers.initialize();
+  Partials.initialize();
+
   new AppRouter();
   Backbone.history.start({ pushState: true });
 });

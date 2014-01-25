@@ -1,11 +1,9 @@
-/*global define*/
-
 define([
   'jquery',
   'underscore',
   'backbone',
   'templates',
-  'common',
+  'config/common',
   'models/user'
 ], function ($, _, Backbone, JST, Common, UserModel) {
   'use strict';

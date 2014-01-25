@@ -1,9 +1,7 @@
-/*global define*/
-
 define([
   'underscore',
   'backbone',
-  'common'
+  'config/common'
 ], function (_, Backbone, Common) {
   'use strict';
 
