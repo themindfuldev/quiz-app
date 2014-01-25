@@ -1,10 +1,10 @@
 define([
   'underscore',
   'backbone',
-  'config/common',
   'config/questions-data',
-  'models/user'
-], function (_, Backbone, Common, QuestionsData, UserModel) {
+  'models/user',
+  'repositories/user'
+], function (_, Backbone, QuestionsData, UserModel, UserRepository) {
   'use strict';
 
   var SummaryModel = Backbone.Model.extend({
@@ -22,7 +22,7 @@ define([
       var answersStats, usersSequence, userId, userModel;
 
       answersStats = {};
-      usersSequence = localStorage.getItem(Common.Repositories.usersSequence);
+      usersSequence = UserRepository.getTotalUsers();
 
       for (userId = 1; userId <= usersSequence; userId++) {
         userModel = new UserModel({ id: userId });
@@ -146,30 +146,7 @@ define([
       return questions;
     },
 
-    // Local storage persistence
-    sync: function(method, model, options) {
-      options || (options = {});
-
-      switch (method){
-        case 'read':
-          this.read(model, options);
-          break;
-      }
-    },
-
-    read: function(model, options) {
-      var key, result;
-
-      key = Common.Repositories.users + model.id;
-      result = localStorage.getItem(key);
-
-      if (result) {
-        result = JSON.parse(result);
-        options.success && options.success(result);
-      } else if (options.error){
-        options.error("Couldn't find id=" + model.id);
-      }
-    }
+    sync: UserRepository.sync
   });
 
   return SummaryModel;
