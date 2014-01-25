@@ -16,7 +16,7 @@ define([
       // Retrieving model
       userId = UserRepository.getCurrentUserId();
       if (userId) {
-        userModel = new SummaryModel({ id: userId });
+        userModel = new UserModel({ id: userId });
         userModel.fetch();
       }
       else {

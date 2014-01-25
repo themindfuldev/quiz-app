@@ -65,7 +65,7 @@ define([
     },
 
     updateUserModel: function(answers) {
-      var userId, userModel;
+      var userId, userModel, questions, i;
 
       // Retrieving model
       userId = UserRepository.getCurrentUserId();
@@ -73,7 +73,14 @@ define([
       userModel.fetch();
 
       // Updating model
-      userModel.get('questions').push({
+      questions = userModel.get('questions');
+      for (i = questions.length - 1; i >= 0; i--) {
+        if (questions[i].id === this.model.id) {
+          questions.splice(i, 1);
+        }
+      }
+
+      questions.push({
         id: this.model.id,
         answers: answers
       });

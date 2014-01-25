@@ -12,10 +12,7 @@ define([
     answersPercentage: {},
 
     initialize: function() {
-      var answersStats;
-
-      answersStats = this.buildAnswersStats();
-
+      var answersStats = this.buildAnswersStats();
       this.buildAnswersPercentage(answersStats);
     },
 
@@ -42,16 +39,10 @@ define([
     },
 
     buildAnswersPercentage: function(answersStats) {
-      var self, answerTotals;
+      var self, totalUsers;
 
       self = this;
-      answerTotals = [];
-
-      _.each(answersStats, function(answers, questionId) {
-        answerTotals[questionId] = _.reduce(answers, function(total, num){
-          return total + num;
-        }, 0);
-      });
+      totalUsers = UserRepository.getTotalUsers();
 
       _.each(answersStats, function(answers, questionId) {
         if (!self.answersPercentage[questionId]) {
@@ -61,7 +52,7 @@ define([
 
         _.each(answers, function(answer, answerId) {
           self.answersPercentage[questionId][answerId] =
-            answer / answerTotals[questionId] * 100;
+            answer / totalUsers * 100;
         });
       });
     },

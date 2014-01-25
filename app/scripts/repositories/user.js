@@ -25,10 +25,6 @@ define([], function () {
       return Repositories.users + id;
     }
 
-    function getTotalUsers() {
-      return localStorage.getItem(Repositories.usersSequence);
-    }
-
     return {
       create: function(model) {
         model.id = getNextId();
@@ -52,7 +48,7 @@ define([], function () {
       readAll: function(collection, options) {
         var totalUsers, id, user, result;
 
-        totalUsers = getTotalUsers();
+        totalUsers = this.getTotalUsers();
         result = [];
         for (id = 1; id <= totalUsers; id++) {
           user = retrieve(localStorage, getKey(id));
@@ -84,6 +80,10 @@ define([], function () {
 
       getCurrentUserId: function() {
         return retrieve(sessionStorage, Repositories.currentUserId);
+      },
+
+      getTotalUsers: function() {
+        return localStorage.getItem(Repositories.usersSequence);
       },
 
       getTopFive: function() {
