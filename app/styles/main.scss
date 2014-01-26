@@ -32,7 +32,7 @@ body {
     margin-top: 0;
     margin-bottom: 0;
     line-height: 40px;
-    padding-bottom: 19px;
+    padding-bottom: 5px;
     text-align: center;
 }
 
@@ -59,6 +59,10 @@ form input[type="checkbox"] {
     padding: 0 20px;
     border-radius: 5px;
     background: #fff;
+
+    p.clear-all-p {
+        text-align: center;
+    }
 }
 
 ol.questions {
@@ -97,6 +101,6 @@ ol.questions {
     }
     /* Space out the masthead */
     .header {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 }

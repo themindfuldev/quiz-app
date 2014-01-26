@@ -18,6 +18,10 @@ define([
           break;
       }
     },
+
+    clearAll: function() {
+      UserRepository.removeAll({});
+    }
   });
 
   return UserCollection;

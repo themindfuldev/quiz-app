@@ -1,16 +1,16 @@
 define([
   'collections/user',
   'config/mediator',
-  'views/top-five-users'
+  'views/sidebar'
 ], function (
   UserCollection,
   Mediator,
-  TopFiveUsersView) {
+  SidebarView) {
 
   'use strict';
 
   var SidebarController = (function() {
-    var topFiveUsersView;
+    var sidebarView;
 
     return {
       initialize: function() {
@@ -19,7 +19,9 @@ define([
       },
 
       action: function() {
-        var topFiveUsersCollection = new UserCollection();
+        var topFiveUsersCollection, self;
+
+        topFiveUsersCollection = new UserCollection();
         topFiveUsersCollection.comparator = function(user) {
           return -user.get("score");
         };
@@ -30,14 +32,23 @@ define([
         }
 
         // View
-        if (topFiveUsersView) topFiveUsersView.remove();
+        if (sidebarView) sidebarView.remove();
 
-        topFiveUsersView = new TopFiveUsersView({
+        sidebarView = new SidebarView({
           collection: topFiveUsersCollection
         });
-        topFiveUsersView.render();
+        sidebarView.render();
 
-        $('#sidebar').html(topFiveUsersView.el);
+        self = this;
+        sidebarView.addObserver(function(event) {
+          if (event === 'clear-all-users') {
+            topFiveUsersCollection.clearAll();
+            self.publish('user-update', {});
+            Backbone.history.navigate('', { trigger:true });
+          }
+        });
+
+        $('#sidebar').html(sidebarView.el);
       }
     }
   })();

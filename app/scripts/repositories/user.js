@@ -17,6 +17,10 @@ define([], function () {
       return storage.getItem(key);
     }
 
+    function destroy(storage, key) {
+      storage.removeItem(key);
+    }
+
     function getNextId() {
       return parseInt(localStorage.getItem(Repositories.usersSequence) || 0, 10) + 1;
     }
@@ -71,11 +75,39 @@ define([], function () {
         result = retrieve(localStorage, key);
 
         if (result) {
-          localStorage.setItem(key, JSON.stringify(model));
+          persist(localStorage, key, JSON.stringify(model));
           options.success && options.success(model);
         } else if (options && options.error){
           options.error("Couldn't find id=" + model.id);
         }
+      },
+
+      remove: function(model, options) {
+        var key, result;
+
+        key = getKey(model.id);
+        result = retrieve(localStorage, key);
+
+        if (result) {
+          destroy(localStorage, key);
+          options.success && options.success(model);
+        } else if (options && options.error){
+          options.error("Couldn't find id=" + model.id);
+        }
+      },
+
+      removeAll: function(options) {
+        var totalUsers, id, user, result;
+
+        totalUsers = this.getTotalUsers();
+        for (id = 1; id <= totalUsers; id++) {
+          this.remove({ id: id }, {});
+        }
+
+        destroy(localStorage, Repositories.usersSequence);
+        destroy(sessionStorage, Repositories.currentUserId);
+
+        options.success && options.success(result);
       },
 
       getCurrentUserId: function() {
@@ -84,10 +116,6 @@ define([], function () {
 
       getTotalUsers: function() {
         return localStorage.getItem(Repositories.usersSequence);
-      },
-
-      getTopFive: function() {
-
       }
     };
 
