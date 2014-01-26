@@ -38,11 +38,18 @@ require([
   'backbone',
   'config/custom-helpers',
   'config/partials',
+  'controllers/top-five-users',
   'routes/app'
-], function (Backbone, CustomHelpers, Partials, AppRouter) {
+], function (Backbone, CustomHelpers, Partials, TopFiveUsersController, AppRouter) {
+  var topFiveView;
+  // Handlebars setup
   CustomHelpers.initialize();
   Partials.initialize();
 
+  // Sidebar view
+  $('#sidebar').html(TopFiveUsersController.action().el);
+
+  // App router
   new AppRouter();
   Backbone.history.start({ pushState: true });
 });

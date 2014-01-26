@@ -1,0 +1,8 @@
+<div class="header">
+  <h3>Top Five Users</h3>
+</div>
+<ol>
+{{#each this}}
+  <li>{{name}}: <b>{{formatPercentage score}}%</b></li>
+{{/each}}
+</ol>

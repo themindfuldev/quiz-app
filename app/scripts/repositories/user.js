@@ -64,29 +64,6 @@ define([], function () {
         }
       },
 
-      readTop: function(collection, options, limit) {
-        var totalUsers, id, user, result;
-
-        totalUsers = this.getTotalUsers();
-        result = [];
-        for (id = 1; id <= totalUsers; id++) {
-          user = retrieve(localStorage, getKey(id));
-          if (user) {
-            result.push(JSON.parse(user));
-          }
-        }
-
-        _.sortBy(result, function(user) {
-          return user.score;
-        });
-
-        if (result) {
-          options.success && options.success(result);
-        } else if (options.error){
-          options.error("Couldn't find any result.");
-        }
-      },
-
       update: function(model, options) {
         var key, result;
 

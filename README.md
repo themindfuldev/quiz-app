@@ -22,27 +22,22 @@ Refactor to Design Patterns for Large-Scale JS
     [
       {
         name: 'Yoda',
-        email: 'yoda@disney.com',
         score: 100
       },
       {
         name: 'Darth Maul',
-        email: 'dmaul@disney.com',
         score: 60
       },
       {
         name: 'Palpatine',
-        email: 'palpatine@disney.com',
         score: 40
       },
       {
         name: 'Han Solo',
-        email: 'hsolo@disney.com',
         score: 40
       },
       {
         name: 'Jabba The Hut',
-        email: 'jhut@disney.com',
         score: 20
       }
     ]

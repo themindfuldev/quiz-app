@@ -10,6 +10,7 @@ define([
     defaults: {
       name: '',
       email: '',
+      score: 0,
       questions: []
     },
 
