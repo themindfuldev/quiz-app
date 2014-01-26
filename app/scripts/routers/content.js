@@ -15,7 +15,7 @@ define([
 
   'use strict';
 
-  var AppRouter = Backbone.Router.extend({
+  var ContentRouter = Backbone.Router.extend({
     routes: {
       '': 'welcome',
       'again': 'again',
@@ -56,5 +56,5 @@ define([
 
   });
 
-  return AppRouter;
+  return ContentRouter;
 });

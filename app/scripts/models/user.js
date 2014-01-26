@@ -66,7 +66,7 @@ define([
           UserRepository.remove(model, options);
           break;
       }
-    },
+    }
   });
 
   return UserModel;

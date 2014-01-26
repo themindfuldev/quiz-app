@@ -3,15 +3,20 @@ define([
   'underscore',
   'backbone',
   'templates',
+  'config/mediator',
   'models/user',
   'repositories/user',
   'views/error',
   'boot'
-], function ($, _, Backbone, JST, UserModel, UserRepository, ErrorView) {
+], function ($, _, Backbone, JST, Mediator, UserModel, UserRepository, ErrorView) {
   'use strict';
 
   var QuestionView = Backbone.View.extend({
     template: JST['app/scripts/templates/question.hbs'],
+
+    initialize: function() {
+      Mediator.installTo(this);
+    },
 
     events: {
       'submit form': 'submit'
@@ -41,6 +46,7 @@ define([
         // Saving user model
         userModel = this.updateUserModel(answers);
         userModel.save();
+        this.publish('user-update', {});
 
         // Next route
         if (this.model.get('lastQuestion')) {

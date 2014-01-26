@@ -11,7 +11,8 @@ define([
 
     render: function() {
       this.$el.html(this.template(this.collection.toJSON()));
-    },
+    }
+
   });
 
   return TopFiveView;
