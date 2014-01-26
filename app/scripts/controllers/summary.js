@@ -1,9 +1,11 @@
 define([
   'models/summary',
+  'models/user',
   'repositories/user',
   'views/summary'
 ], function (
   SummaryModel,
+  UserModel,
   UserRepository,
   SummaryView) {
 
@@ -11,13 +13,15 @@ define([
 
   var SummaryController = {
     action: function() {
-      var userId, summaryModel, summaryView;
+      var userId, userModel, summaryModel, summaryView;
 
       // Retrieving model
       userId = UserRepository.getCurrentUserId();
       if (userId) {
-        summaryModel = new SummaryModel({ id: userId });
-        summaryModel.fetch();
+        userModel = new UserModel({ id: userId });
+        userModel.fetch();
+
+        summaryModel = new SummaryModel({ userModel: userModel });
 
         summaryView = new SummaryView({
           model: summaryModel

@@ -11,9 +11,12 @@ define([
   var SummaryModel = Backbone.Model.extend({
     answersPercentage: {},
 
-    initialize: function() {
+    initialize: function(options) {
       var answersStats = this.buildAnswersStats();
       this.buildAnswersPercentage(answersStats);
+
+      this.attributes = options.userModel.attributes;
+      this.set('questions', this.mergeQuestions(this.get('questions')));
     },
 
     buildAnswersStats: function() {
@@ -55,42 +58,6 @@ define([
             answer / totalUsers * 100;
         });
       });
-    },
-
-    parse: function(response){
-      response.score = this.calculateScore(response.questions);
-      response.result = this.calculateResult(response.score);
-      response.questions = this.mergeQuestions(response.questions);
-      return response;
-    },
-
-    calculateScore: function(answeredQuestions) {
-      var correctQuestions = 0;
-
-      _.each(answeredQuestions, function(answeredQuestion) {
-        var originalQuestion = _.findWhere(QuestionsData, { id: parseInt(answeredQuestion.id, 10) });
-        if (_.isEqual(answeredQuestion.answers, originalQuestion.correctAnswers)) {
-          correctQuestions++;
-        }
-      });
-
-      return correctQuestions / QuestionsData.length * 100;
-    },
-
-    calculateResult: function(score) {
-      var result;
-
-      if (score >= 80) {
-        result = 'The force is strong with this one!';
-      }
-      else if (score >= 60) {
-        result = 'May the force be with you!';
-      }
-      else {
-        result = 'Much to learn you still have, my young padawan!';
-      }
-
-      return result;
     },
 
     mergeQuestions: function(answeredQuestions) {
@@ -136,16 +103,6 @@ define([
       });
 
       return questions;
-    },
-
-    sync: function(method, model, options) {
-      options || (options = {});
-
-      switch (method){
-        case 'read':
-          UserRepository.read(model, options);
-          break;
-      }
     }
   });
 
