@@ -11,11 +11,12 @@ define([
     template: JST['app/scripts/templates/welcome.hbs'],
 
     events: {
-      'submit form': 'submit'
+      'submit form': 'submit',
+      'click [data-route]': 'route'
     },
 
     render: function() {
-      this.$el.html(this.template(this.model.toJSON()));
+     this.$el.html(this.template(this.model.toJSON()));
     },
 
     submit: function(e) {
@@ -33,6 +34,11 @@ define([
         name: this.$el.find('#name-field').val(),
         email: this.$el.find('#email-field').val()
       });
+    },
+
+    route: function(e) {
+      e.preventDefault();
+      Backbone.history.navigate($(e.currentTarget).attr('data-route'), { trigger: true });
     }
 
   });
